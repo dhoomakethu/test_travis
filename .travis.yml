@@ -11,14 +11,14 @@ before_install:
 
 install:
 #  - travis.sh pip install pip-accel
-  - travis.sh pip install -U setuptools
-  - travis.sh pip install coveralls
-  - travis.sh pip install --requirement=requirements-checks.txt
-  - travis.sh pip install --requirement=requirements-tests.txt
-  - travis.sh LC_ALL=C pip install .
+  - ./travis.sh pip install -U setuptools
+  - ./travis.sh pip install coveralls
+  - ./travis.sh pip install --requirement=requirements-checks.txt
+  - ./travis.sh pip install --requirement=requirements-tests.txt
+  - ./travis.sh LC_ALL=C pip install .
 script:
 #  - scripts/travis.sh make check
-  - scripts/travis.sh which python3
+  - ./travis.sh which python3
 after_success:
   - echo Done!!!
 branches:
