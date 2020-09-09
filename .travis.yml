@@ -8,6 +8,7 @@ matrix:
 before_install:
   - if [ $TRAVIS_OS_NAME = osx ]; then brew update; fi
   - if [ $TRAVIS_OS_NAME = osx ]; then brew install openssl; fi
+  - chmod a+x travis.sh
 
 install:
 #  - travis.sh pip install pip-accel
