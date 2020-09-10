@@ -18,7 +18,7 @@ install:
 script:
 #  - scripts/travis.sh make check
   - ./travis.sh which python3
-  - ./travis.sh python -c "\"import serial;s=serial.Serial('/dev/ptyp0');print(s); s.close()"\"; 
+  - ./travis.sh python -c "\"import fcntl; fcntl.fcntl(1, fcntl.F_SETFL, 0); import serial;s=serial.Serial('/dev/ptyp0');print(s); s.close()"\"; 
 after_success:
   - echo Done!!!
 branches:
