@@ -1,0 +1,26 @@
+sudo: false
+language: python
+matrix:
+  include:
+  - os: osx
+    osx_image: xcode11.6
+    language: shell
+before_install:
+  - if [ $TRAVIS_OS_NAME = osx ]; then brew update; fi
+  - if [ $TRAVIS_OS_NAME = osx ]; then brew install openssl; fi
+  - if [$TRAVIS_OS_NAME = osx ]; then python -c "import fcntl; fcntl.fcntl(1, fcntl.F_SETFL, 0)"; fi
+  - chmod a+x travis.sh
+
+install:
+#  - travis.sh pip install pip-accel
+  - ./travis.sh pip install -U setuptools
+  - ./travis.sh pip install coveralls pyserial
+script:
+#  - scripts/travis.sh make check
+  - ./travis.sh which python3
+  - ./travis.sh python -c "\"import fcntl os; fcntl.fcntl('/dev/ptyp0', fcntl.F_GETFL); fcntl.fcntl('/dev/ptyp0', fcntl.F_SETFL, flags&~os.O_NONBLOCK); import serial;s=serial.Serial('/dev/ptyp0');print(s); s.close()"\"; 
+after_success:
+  - echo Done!!!
+branches:
+  except:
+    - /^[0-9]/
